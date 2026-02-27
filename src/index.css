@@ -1,0 +1,872 @@
+/* ===== GymTrack Design System ===== */
+
+:root {
+  /* Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #161616;
+  --bg-card-hover: #1c1c1c;
+  --bg-input: #1a1a1a;
+  --border: #222222;
+  --border-light: #2a2a2a;
+
+  --text-primary: #e8e8e8;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+
+  --accent: #00ff88;
+  --accent-dim: #00cc6a;
+  --accent-bg: rgba(0, 255, 136, 0.08);
+  --accent-border: rgba(0, 255, 136, 0.2);
+
+  --amber: #ffaa00;
+  --amber-bg: rgba(255, 170, 0, 0.08);
+  --red: #ff4444;
+  --red-bg: rgba(255, 68, 68, 0.08);
+
+  --success: #00ff88;
+  --warning: #ffaa00;
+  --danger: #ff4444;
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition: 200ms ease;
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ===== Layout ===== */
+.app-shell {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  padding: var(--space-md);
+  padding-bottom: 100px;
+}
+
+.page-header {
+  margin-bottom: var(--space-lg);
+}
+
+.page-title {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* ===== Bottom Nav ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: var(--space-sm) 0;
+  padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.nav-item.active {
+  color: var(--accent);
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: var(--transition);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-clickable:active {
+  transform: scale(0.98);
+}
+
+/* ===== Workout Card ===== */
+.workout-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.workout-card-icon {
+  font-size: var(--fs-2xl);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.workout-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.workout-card-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+.workout-card-sub {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.workout-card-arrow {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+}
+
+/* ===== Week Calendar ===== */
+.week-calendar {
+  display: flex;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  padding-bottom: var(--space-sm);
+  scrollbar-width: none;
+}
+
+.week-calendar::-webkit-scrollbar {
+  display: none;
+}
+
+.week-day {
+  flex: 1;
+  min-width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-xs);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.week-day.today {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.week-day.completed {
+  border-color: var(--accent-dim);
+}
+
+.week-day-name {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.week-day-icon {
+  font-size: 1.125rem;
+}
+
+.week-day-type {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== Exercise List ===== */
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.exercise-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.exercise-item.completed {
+  opacity: 0.5;
+  border-color: var(--accent-border);
+}
+
+.exercise-checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+  cursor: pointer;
+  background: transparent;
+  font-size: var(--fs-sm);
+}
+
+.exercise-checkbox.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.exercise-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.exercise-name {
+  font-size: var(--fs-base);
+  font-weight: 600;
+}
+
+.exercise-details {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.exercise-muscle {
+  font-size: var(--fs-xs);
+  color: var(--accent-dim);
+  font-weight: 500;
+}
+
+.exercise-weight-input {
+  width: 64px;
+  text-align: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+
+.exercise-weight-input::placeholder {
+  color: var(--text-muted);
+}
+
+.exercise-weight-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ===== Progress Ring ===== */
+.progress-ring-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.progress-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.progress-ring svg {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 6;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progress-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.progress-ring-label {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ===== Cardio Timeline ===== */
+.cardio-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cardio-phase {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: var(--transition);
+}
+
+.cardio-phase.active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.cardio-phase.done {
+  opacity: 0.6;
+}
+
+.cardio-phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.cardio-phase-name {
+  font-weight: 700;
+  font-size: var(--fs-lg);
+}
+
+.cardio-phase-weeks {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  background: var(--bg-input);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.cardio-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.cardio-block {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+}
+
+.cardio-tip {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+}
+
+.cardio-advance-btn {
+  margin-top: var(--space-md);
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.cardio-advance-btn:hover {
+  background: var(--accent-dim);
+}
+
+.cardio-advance-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  min-height: 48px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dim);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+}
+
+.btn-danger {
+  background: var(--red-bg);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  color: var(--red);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Forms ===== */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-base);
+  min-height: 48px;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.form-error {
+  font-size: var(--fs-xs);
+  color: var(--red);
+  margin-top: var(--space-xs);
+}
+
+/* ===== Auth Page ===== */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--space-lg);
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.auth-logo {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+}
+
+.auth-title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.auth-accent {
+  color: var(--accent);
+}
+
+.auth-tagline {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-xs);
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 360px;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: var(--space-lg);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.auth-toggle button {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+/* ===== Profile ===== */
+.profile-header {
+  text-align: center;
+  padding: var(--space-lg) 0;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--accent-bg);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-2xl);
+  margin: 0 auto var(--space-md);
+}
+
+.profile-name {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.stat-card {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.stat-value {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* ===== Section ===== */
+.section {
+  margin-bottom: var(--space-lg);
+}
+
+.section-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+/* ===== Start Workout Button ===== */
+.start-workout-btn {
+  width: 100%;
+  padding: var(--space-md);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  color: var(--bg-primary);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: 56px;
+}
+
+.start-workout-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+}
+
+.start-workout-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== Back Button ===== */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  padding: var(--space-sm) 0;
+  margin-bottom: var(--space-md);
+  transition: var(--transition);
+}
+
+.back-btn:hover {
+  color: var(--accent);
+}
+
+/* ===== Summary ===== */
+.summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.summary-badge.success {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes checkmark {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.fade-in {
+  animation: fadeIn 400ms var(--transition-slow) forwards;
+}
+
+.scale-in {
+  animation: scaleIn 300ms var(--transition-slow) forwards;
+}
+
+/* ===== Loading ===== */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Toast / Alerts ===== */
+.toast {
+  position: fixed;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--accent-border);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  z-index: 200;
+  animation: fadeIn 300ms ease;
+  max-width: calc(100% - var(--space-xl));
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 768px) {
+  .app-shell {
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}

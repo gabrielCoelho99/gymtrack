@@ -1,0 +1,68 @@
+export const cardioPhases = [
+  {
+    phase: 'Adaptação',
+    weeks: '1-2',
+    weekStart: 1,
+    weekEnd: 2,
+    color: '#4ade80',
+    blocks: [
+      { activity: 'Caminhada leve (5-6 km/h)', duration: '25 min' },
+    ],
+    totalDuration: '25 min',
+    tip: 'Foque em manter uma caminhada confortável. Se sentir dores, diminua o ritmo.',
+  },
+  {
+    phase: 'Base',
+    weeks: '3-4',
+    weekStart: 3,
+    weekEnd: 4,
+    color: '#22d3ee',
+    blocks: [
+      { activity: 'Caminhada rápida (6-7 km/h)', duration: '30 min' },
+    ],
+    totalDuration: '30 min',
+    tip: 'Aumente o ritmo gradualmente. Você deve conseguir conversar enquanto caminha.',
+  },
+  {
+    phase: 'Transição',
+    weeks: '5-6',
+    weekStart: 5,
+    weekEnd: 6,
+    color: '#a78bfa',
+    blocks: [
+      { activity: 'Caminhada rápida', duration: '4 min' },
+      { activity: 'Trote leve', duration: '1 min' },
+    ],
+    repeat: 6,
+    totalDuration: '30 min',
+    tip: 'Primeiro contato com a corrida. Mantenha o trote leve, sem forçar.',
+  },
+  {
+    phase: 'Evolução',
+    weeks: '7-8',
+    weekStart: 7,
+    weekEnd: 8,
+    color: '#f472b6',
+    blocks: [
+      { activity: 'Caminhada rápida', duration: '3 min' },
+      { activity: 'Corrida leve', duration: '2 min' },
+    ],
+    repeat: 6,
+    totalDuration: '30 min',
+    tip: 'Agora iguala: 3min caminhada + 2min corrida. Corpo já adaptado!',
+  },
+  {
+    phase: 'Progressão',
+    weeks: '9-12',
+    weekStart: 9,
+    weekEnd: 12,
+    color: '#fb923c',
+    blocks: [
+      { activity: 'Caminhada', duration: '2 min' },
+      { activity: 'Corrida', duration: '3 min' },
+    ],
+    repeat: 7,
+    totalDuration: '35 min',
+    tip: 'Mais corrida que caminhada! Você está pronto para correr por mais tempo.',
+  },
+];
